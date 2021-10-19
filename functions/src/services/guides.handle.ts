@@ -31,9 +31,9 @@ async function getGuides(req: Request, res: Response): Promise<Response> {
     }
 
     guidesDB.docs.forEach(guide => {
-      const dataGuide = guide.data();
-
-      guides.push(dataGuide);
+      const { typeName, description } = guide.data();
+      const id = guide.id;
+      guides.push({typeName, description, id});
     })
 
     return res.status(200).json(guides);

@@ -13,10 +13,11 @@ async function getAccomodations(req: Request, res: Response): Promise<Response> 
       })
     }
 
-    accomodationsDB.docs.forEach(car => {
-      const dataCar = car.data();
+    accomodationsDB.docs.forEach(accomodation => {
+      const { name, picture } = accomodation.data();
+      const id = accomodation.id;
 
-      accomodations.push(dataCar);
+      accomodations.push({name, picture, id});
     })
 
     return res.status(200).json(accomodations)

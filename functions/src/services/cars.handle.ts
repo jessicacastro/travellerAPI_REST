@@ -31,9 +31,9 @@ async function getCars(req: Request, res: Response): Promise<Response> {
     }
 
     carsDB.docs.forEach(car => {
-      const dataCar = car.data();
-
-      cars.push(dataCar);
+      const { name, picture } = car.data();
+      const id = car.id;
+      cars.push({name, picture, id});
     })
 
     return res.status(200).json(cars)

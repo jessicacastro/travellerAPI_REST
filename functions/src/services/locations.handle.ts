@@ -45,9 +45,27 @@ async function getLocations(req: Request, res: Response): Promise<Response> {
     }
 
     locationsDB.docs.forEach(location => {
-      const dataLocation = location.data();
+      const { 
+        about, 
+        address, 
+        lat,
+        long,
+        name, 
+        observation, 
+        resume  
+      } = location.data();
+      const id = location.id;
 
-      locations.push(dataLocation);
+      locations.push({
+        id,
+        about, 
+        address, 
+        lat,
+        long,
+        name, 
+        observation, 
+        resume  
+      });
     })
 
     return res.status(200).json(locations);
