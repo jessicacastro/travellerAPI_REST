@@ -26,10 +26,10 @@ async function createLocations(req: Request, res: Response): Promise<Response> {
 
 async function getLocations(req: Request, res: Response): Promise<Response> {
   try {
-    const { guideId } = req.body;
+    const guideId: string = req.query.guideId as string;
 
     if (!guideId) {
-      return res.status(401).json({ message: "Inserts a guide id to get a location" });
+      return res.status(403).json({ message: "Inserts a guide id to get a location" });
     }
 
     const guideRef = db.collection("guides").doc(guideId);
